@@ -1,18 +1,17 @@
-function detectCycle(head) {
-  let slow = head;
-  let fast = head;
-  while (fast && fast.next) {
-    slow = slow.next;
-    fast = fast.next.next;
-    if (slow === fast) {
-      let p1 = head;
-      let p2 = slow;
-      while (p1 !== p2) {
-        p1 = p1.next;
-        p2 = p2.next;
-      }
-      return p1;
+function combinationSum(candidates, target) {
+  const result = [];
+  backtrack(0, [], 0);
+  return result;
+  function backtrack(start, current, sum) {
+    if (sum === target) {
+      result.push([...current]);
+      return;
+    }
+    if (sum > target || start === candidates.length) return;
+    for (let i = start; i < candidates.length; i++) {
+      current.push(candidates[i]);
+      backtrack(i, current, sum + candidates[i]);
+      current.pop();
     }
   }
-  return null;
 }
