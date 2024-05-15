@@ -1,13 +1,14 @@
-function searchMatrix(matrix, target) {
-  if (matrix.length === 0 || matrix[0].length === 0) return false;
-  const rows = matrix.length;
-  const cols = matrix[0].length;
-  let row = 0;
-  let col = cols - 1;
-  while (row < rows && col >= 0) {
-    if (matrix[row][col] === target) return true;
-    else if (matrix[row][col] < target) row++;
-    else col--;
+function subarraySum(nums, k) {
+  const map = new Map();
+  map.set(0, 1);
+  let count = 0;
+  let sum = 0;
+  for (const num of nums) {
+    sum += num;
+    if (map.has(sum - k)) {
+      count += map.get(sum - k);
+    }
+    map.set(sum, (map.get(sum) || 0) + 1);
   }
-  return false;
+  return count;
 }
